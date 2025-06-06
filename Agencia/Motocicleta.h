@@ -8,9 +8,15 @@ using namespace std;
 class Motocicleta : public Vehiculo {
     double peso;
 public:
+    Motocicleta(string ma, string mo, int an, double pr, int cil, string tc, double p);
+
     double calcularPrecio();
     string mostrarInfo();
 };
+
+Motocicleta::Motocicleta(string ma, string mo, int an, double pr, int cil, string tc, double p)
+: Vehiculo(ma, mo, an, pr, cil, tc), peso(p) {
+}
 
 double Motocicleta::calcularPrecio() {
     return precio + peso * 100;

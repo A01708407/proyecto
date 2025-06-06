@@ -5,12 +5,18 @@
 #include <iostream>
 using namespace std;
 
-class Auto:public Vehiculo {
+class Auto : public Vehiculo {
     int numPuertas;
 public:
+    Auto(string ma, string mo, int an, double pr, int cil, string tc, int puertas);
+
     double calcularPrecio();
     string mostrarInfo();
 };
+
+Auto::Auto(string ma, string mo, int an, double pr, int cil, string tc, int puertas)
+: Vehiculo(ma, mo, an, pr, cil, tc), numPuertas(puertas) {
+}
 
 double Auto::calcularPrecio() {
     return precio + numPuertas * 500;
