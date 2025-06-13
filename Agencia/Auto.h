@@ -18,10 +18,12 @@ Auto::Auto(string ma, string mo, int an, double pr, int cil, string tc, int puer
 : Vehiculo(ma, mo, an, pr, cil, tc), numPuertas(puertas) {
 }
 
+// Sobre escritura
 double Auto::calcularPrecio() {
     return precio + numPuertas * 500;
 }
 
+// Sobre escritura
 string Auto::mostrarInfo() {
     string m = Vehiculo::mostrarInfo();
     cout << "Número de puertas: " << numPuertas << endl;

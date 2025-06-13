@@ -16,6 +16,7 @@ int main() {
     // Inicialización
     Agencia agencia;
     Vendedor* vendedor;  // Puntero a vendedor sin valor
+    Vehiculo* lastVeh = nullptr;  // Último vehículo agregado para venta por puntero
 
     // Registrar vendedor
     cout << "Ingresa nombre del vendedor: ";
@@ -29,10 +30,11 @@ int main() {
     while (op != 0) {
         cout << "\n1. Agregar auto\n";
         cout << "2. Agregar motocicleta\n";
-        cout << "3. Vender vehículo\n";
+        cout << "3. Vender vehículo (por modelo)\n";
         cout << "4. Mostrar vehículos\n";
         cout << "5. Eliminar vehículo\n";
         cout << "6. Mostrar ventas vendedor\n";
+        cout << "7. Vender último vehículo (por puntero)\n";
         cout << "0. Salir\n";
         cout << "Elige opción: ";
         cin >> op;
@@ -43,6 +45,7 @@ int main() {
             cin >> marca >> modelo >> anio >> precio >> cilindrada >> tipo >> puertas;
             Vehiculo* a = new Auto(marca, modelo, anio, precio, cilindrada, tipo, puertas);
             agencia.agregarVehiculo(a);
+            lastVeh = a;  // Guardamos puntero
         }
         else if (op == 2) {
             // Agregar motocicleta
@@ -50,9 +53,10 @@ int main() {
             cin >> marca >> modelo >> anio >> precio >> cilindrada >> tipo >> peso;
             Vehiculo* m = new Motocicleta(marca, modelo, anio, precio, cilindrada, tipo, peso);
             agencia.agregarVehiculo(m);
+            lastVeh = m;  // Guardamos puntero
         }
         else if (op == 3) {
-            // Vender y eliminar vehículo
+            // Vender y eliminar vehículo por modelo
             cout << "Ingresa modelo a vender: ";
             cin >> modelo;
             if (vendedor->venderVehiculo(modelo)) {
@@ -81,6 +85,21 @@ int main() {
             // Mostrar ventas
             cout << "Ventas de " << vendedor->getNombre()
                  << ": " << vendedor->getVentas() << "\n";
+        }
+        else if (op == 7) {
+            // Vender y eliminar vehículo por puntero
+            if (lastVeh) {
+                // Obtenemos el modelo en una variable para pasar por referencia
+                string model = lastVeh->mostrarInfo();
+                if (vendedor->venderVehiculo(lastVeh)) {
+                    agencia.eliminarVehiculo(model);
+                    cout << "Venta por puntero exitosa.\n";
+                } else {
+                    cout << "Venta fallida.\n";
+                }
+            } else {
+                cout << "No hay vehículos disponibles para venta por puntero.\n";
+            }
         }
         else if (op == 0) {
             // Salir
