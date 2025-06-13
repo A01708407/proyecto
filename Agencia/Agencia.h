@@ -7,21 +7,22 @@
 #include "Vendedor.h"
 using namespace std;
 
+// Administra los vehículos y vendedores
 class Agencia {
-    Vehiculo** vehiculos;
-    Vendedor** vendedores;
-    string nombre;
-    string direccion;
-    int contadorVehiculos;
-    int contadorVendedores;
+    Vehiculo** vehiculos; // Arreglo de punteros (dinámico) de vehículos
+    Vendedor** vendedores; // Arreglo de vendedores (dinámico) de vendedores
+    string nombre; // Nombre de la agencia
+    string direccion; // Dirección de la agencia
+    int contadorVehiculos; // Contador de Vehiculos
+    int contadorVendedores; // Contador de Vendedores
 public:
     Agencia();
     Agencia(Vehiculo** veh, Vendedor** ven, string n, string d, int cveh, int cven);
 
-    void agregarVehiculo(Vehiculo* vehiculo);
-    void agregarVendedor(Vendedor* vendedor);
-    bool eliminarVehiculo(string& modelo);
-    void mostrarVehiculos();
+    void agregarVehiculo(Vehiculo* vehiculo); // Añade Vehículo
+    void agregarVendedor(Vendedor* vendedor); // Añade Vendedor
+    bool eliminarVehiculo(string& modelo); // Borra por modelo
+    void mostrarVehiculos(); // Lista los vehículos
 };
 
 Agencia::Agencia()

@@ -8,50 +8,87 @@
 using namespace std;
 
 int main() {
-    // Creamos algunos vehículos
-    Vehiculo* v1 = new Auto("Toyota", "Corolla", 2022, 200000, 1600, "Gasolina", 4);
-    Vehiculo* v2 = new Motocicleta("Honda", "CBR500R", 2021, 150000, 500, "Gasolina", 180);
+    string marca, modelo, tipo, nombre;
+    int anio, cilindrada, puertas, id;
+    double precio, peso;
+    int op = -1;
 
-    // Mostramos información y precios (métodos sobreescritos con virtual)
-    cout << "--- Información de Vehículos ---" << endl;
-    v1->mostrarInfo();
-    cout << "Precio calculado: " << v1->calcularPrecio() << endl << endl;
-
-    v2->mostrarInfo();
-    cout << "Precio calculado: " << v2->calcularPrecio() << endl << endl;
-
-    // Creamos un vendedor y registramos ventas
-    Vendedor* vendedor1 = new Vendedor("Ana Gomez", 101, 0);
-    vendedor1->venderVehiculo(v1);
-    vendedor1->venderVehiculo("Corolla");
-
-    cout << "\nVentas de " << vendedor1->getNombre() << ": " << vendedor1->getVentas() << " ventas." << endl;
-
-    // Creación de la agencia y agregamos vehículos y vendedor
+    // Inicialización
     Agencia agencia;
-    agencia.agregarVehiculo(v1);
-    agencia.agregarVehiculo(v2);
-    agencia.agregarVendedor(vendedor1);
+    Vendedor* vendedor;  // Puntero a vendedor sin valor
 
-    cout << "\n--- Vehículos en la agencia ---" << endl;
-    agencia.mostrarVehiculos();
+    // Registrar vendedor
+    cout << "Ingresa nombre del vendedor: ";
+    cin >> nombre;
+    cout << "Ingresa ID del vendedor: ";
+    cin >> id;
+    vendedor = new Vendedor(nombre, id, 0);
+    agencia.agregarVendedor(vendedor);
 
-    // Eliminamos un vehículo por modelo
-    string modeloBuscar = "CBR500R";
-    bool eliminado = agencia.eliminarVehiculo(modeloBuscar);
-    if (eliminado) {
-        cout << "\nVehículo con modelo " << modeloBuscar << " eliminado de la agencia." << endl;
-    } else {
-        cout << "\nNo se encontró el vehículo con modelo " << modeloBuscar << endl;
+    // Menú principal
+    while (op != 0) {
+        cout << "\n1. Agregar auto\n";
+        cout << "2. Agregar motocicleta\n";
+        cout << "3. Vender vehículo\n";
+        cout << "4. Mostrar vehículos\n";
+        cout << "5. Eliminar vehículo\n";
+        cout << "6. Mostrar ventas vendedor\n";
+        cout << "0. Salir\n";
+        cout << "Elige opción: ";
+        cin >> op;
+
+        if (op == 1) {
+            // Agregar auto
+            cout << "Ingresa marca modelo año precio cilindrada tipoCombustible numPuertas: ";
+            cin >> marca >> modelo >> anio >> precio >> cilindrada >> tipo >> puertas;
+            Vehiculo* a = new Auto(marca, modelo, anio, precio, cilindrada, tipo, puertas);
+            agencia.agregarVehiculo(a);
+        }
+        else if (op == 2) {
+            // Agregar motocicleta
+            cout << "Ingresa marca modelo año precio cilindrada tipoCombustible peso: ";
+            cin >> marca >> modelo >> anio >> precio >> cilindrada >> tipo >> peso;
+            Vehiculo* m = new Motocicleta(marca, modelo, anio, precio, cilindrada, tipo, peso);
+            agencia.agregarVehiculo(m);
+        }
+        else if (op == 3) {
+            // Vender y eliminar vehículo
+            cout << "Ingresa modelo a vender: ";
+            cin >> modelo;
+            if (vendedor->venderVehiculo(modelo)) {
+                agencia.eliminarVehiculo(modelo);
+                cout << "Venta exitosa y vehículo removido.\n";
+            } else {
+                cout << "Venta fallida.\n";
+            }
+        }
+        else if (op == 4) {
+            // Mostrar vehículos
+            cout << "--- Vehículos ---\n";
+            agencia.mostrarVehiculos();
+        }
+        else if (op == 5) {
+            // Eliminar vehículo directamente
+            cout << "Ingresa modelo a eliminar: ";
+            cin >> modelo;
+            if (agencia.eliminarVehiculo(modelo)) {
+                cout << "Vehículo eliminado.\n";
+            } else {
+                cout << "No encontrado.\n";
+            }
+        }
+        else if (op == 6) {
+            // Mostrar ventas
+            cout << "Ventas de " << vendedor->getNombre()
+                 << ": " << vendedor->getVentas() << "\n";
+        }
+        else if (op == 0) {
+            // Salir
+            cout << "Saliendo...\n";
+        }
+        else {
+            cout << "Opción inválida.\n";
+        }
     }
-
-    cout << "\n--- Vehículos restantes en la agencia ---" << endl;
-    agencia.mostrarVehiculos();
-
-    // Destructores
-    delete v1;
-    delete v2;
-    delete vendedor1;
-
     return 0;
 }

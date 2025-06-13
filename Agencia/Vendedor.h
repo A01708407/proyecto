@@ -6,18 +6,19 @@
 #include "Vehiculo.h"
 using namespace std;
 
+// Clase del gestor de ventas de los vehículos
 class Vendedor {
-    string nombre;
-    int id;
-    int ventas;
+    string nombre; // Nombre del vendedor
+    int id; // Identificador único
+    int ventas; // Contador de las ventas
 public:
     Vendedor();
     Vendedor(string n, int i, int v);
-    bool venderVehiculo(Vehiculo* vehiculo);
-    bool venderVehiculo(string modelo); // Sobrecarga
-    string getNombre();
-    int getId();
-    int getVentas();
+    bool venderVehiculo(Vehiculo* vehiculo); // Venta por puntero
+    bool venderVehiculo(string modelo); // Sobrecarga en venta por modelo
+    string getNombre(); // Devuelve el nombre
+    int getId(); // Devuelve el ID
+    int getVentas(); // Devuelve las ventas totales
 };
 
 Vendedor::Vendedor()

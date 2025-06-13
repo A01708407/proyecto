@@ -5,13 +5,13 @@
 #include <iostream>
 using namespace std;
 
+// Clase de auto con su número de puertas
 class Auto : public Vehiculo {
-    int numPuertas;
+    int numPuertas; // número de puertas (2 ó 4)
 public:
     Auto(string ma, string mo, int an, double pr, int cil, string tc, int puertas);
-
-    double calcularPrecio();
-    string mostrarInfo();
+    double calcularPrecio(); // Calcula el precio dependiendo el número de puertas
+    string mostrarInfo(); // Regresa la información
 };
 
 Auto::Auto(string ma, string mo, int an, double pr, int cil, string tc, int puertas)

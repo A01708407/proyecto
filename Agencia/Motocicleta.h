@@ -5,13 +5,13 @@
 #include <iostream>
 using namespace std;
 
+// Clase de moto con su peso específico
 class Motocicleta : public Vehiculo {
-    double peso;
+    double peso; // Peso en kg
 public:
     Motocicleta(string ma, string mo, int an, double pr, int cil, string tc, double p);
-
-    double calcularPrecio();
-    string mostrarInfo();
+    double calcularPrecio(); // Calcula el precio dependiendo del peso
+    string mostrarInfo(); // Regresa la información
 };
 
 Motocicleta::Motocicleta(string ma, string mo, int an, double pr, int cil, string tc, double p)

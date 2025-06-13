@@ -5,14 +5,15 @@
 #include <iostream>
 using namespace std;
 
+// Clase base abstracta para cualquier vehículo
 class Vehiculo {
 protected:
-    string marca;
-    string modelo;
-    int anio;
-    double precio;
-    int cilindrada;
-    string tipoCombustible;
+    string marca; // marca del vehículo
+    string modelo; // modelo del vehículo
+    int anio; // año de fabricación
+    double precio; // precio base
+    int cilindrada; // Cilindrada del motor
+    string tipoCombustible; // Tipo de combustible (gasolina, diesel, etc)
 public:
     Vehiculo();
     Vehiculo(string ma, string mo, int an, double pr, int cil, string tc);
